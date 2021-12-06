@@ -3,6 +3,7 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
+	corecontract "github.com/fbsobreira/gotron-sdk/pkg/proto/core/contract"
 	"math"
 	"strconv"
 	"strings"
@@ -13,7 +14,6 @@ import (
 	"github.com/fbsobreira/gotron-sdk/pkg/client/transaction"
 	"github.com/fbsobreira/gotron-sdk/pkg/common"
 	"github.com/fbsobreira/gotron-sdk/pkg/keystore"
-	"github.com/fbsobreira/gotron-sdk/pkg/proto/core"
 	"github.com/fbsobreira/gotron-sdk/pkg/store"
 	"github.com/spf13/cobra"
 )
@@ -385,7 +385,7 @@ func trc10Sub() []*cobra.Command {
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 
-			var asset *core.AssetIssueContract
+			var asset *corecontract.AssetIssueContract
 			var err error
 			found := false
 			if _, err := strconv.Atoi(args[0]); err == nil {

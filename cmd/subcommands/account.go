@@ -3,6 +3,7 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
+	corecontract "github.com/fbsobreira/gotron-sdk/pkg/proto/core/contract"
 	"math"
 	"strconv"
 	"strings"
@@ -300,9 +301,9 @@ func accountSub() []*cobra.Command {
 				delegateTo = delegateAddr.String()
 			}
 
-			rType := core.ResourceCode_BANDWIDTH
+			rType := corecontract.ResourceCode_BANDWIDTH
 			if resourcesType == 1 {
-				rType = core.ResourceCode_ENERGY
+				rType = corecontract.ResourceCode_ENERGY
 			} else if resourcesType != 0 {
 				return fmt.Errorf("invalid resource. Use 0 for Bandwidth or 1 for Energy")
 			}

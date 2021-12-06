@@ -2,6 +2,7 @@ package client
 
 import (
 	"fmt"
+	corecontract "github.com/fbsobreira/gotron-sdk/pkg/proto/core/contract"
 	"math/big"
 	"strconv"
 	"time"
@@ -29,7 +30,7 @@ func (g *GrpcClient) GetAssetIssueByAccount(address string) (*api.AssetIssueList
 }
 
 // GetAssetIssueByName list asset issued by name
-func (g *GrpcClient) GetAssetIssueByName(name string) (*core.AssetIssueContract, error) {
+func (g *GrpcClient) GetAssetIssueByName(name string) (*corecontract.AssetIssueContract, error) {
 	ctx, cancel := g.getContext()
 	defer cancel()
 
@@ -37,7 +38,7 @@ func (g *GrpcClient) GetAssetIssueByName(name string) (*core.AssetIssueContract,
 }
 
 // GetAssetIssueByID list asset issued by ID
-func (g *GrpcClient) GetAssetIssueByID(tokenID string) (*core.AssetIssueContract, error) {
+func (g *GrpcClient) GetAssetIssueByID(tokenID string) (*corecontract.AssetIssueContract, error) {
 	bn := new(big.Int).SetBytes([]byte(tokenID))
 
 	ctx, cancel := g.getContext()
@@ -68,7 +69,7 @@ func (g *GrpcClient) AssetIssue(from, name, description, abbr, urlStr string,
 	trxNum, icoNum, voteScore int32, frozenSupply map[string]string) (*api.TransactionExtention, error) {
 	var err error
 
-	contract := &core.AssetIssueContract{}
+	contract := &corecontract.AssetIssueContract{}
 	if contract.OwnerAddress, err = common.DecodeCheck(from); err != nil {
 		return nil, err
 	}
@@ -126,8 +127,7 @@ func (g *GrpcClient) AssetIssue(from, name, description, abbr, urlStr string,
 		if err != nil {
 			return nil, fmt.Errorf("create asset issue error: convert error: %v", err)
 		}
-		assetIssueContractFrozenSupply := new(core.
-			AssetIssueContract_FrozenSupply)
+		assetIssueContractFrozenSupply := new(corecontract.AssetIssueContract_FrozenSupply)
 		assetIssueContractFrozenSupply.FrozenAmount = amount
 		assetIssueContractFrozenSupply.FrozenDays = days
 		// add supply to contract
@@ -156,7 +156,7 @@ func (g *GrpcClient) UpdateAssetIssue(from, description, urlStr string,
 	newLimit, newPublicLimit int64) (*api.TransactionExtention, error) {
 	var err error
 
-	contract := &core.UpdateAssetContract{}
+	contract := &corecontract.UpdateAssetContract{}
 	if contract.OwnerAddress, err = common.DecodeCheck(from); err != nil {
 		return nil, err
 	}
@@ -186,7 +186,7 @@ func (g *GrpcClient) UpdateAssetIssue(from, description, urlStr string,
 func (g *GrpcClient) TransferAsset(from, toAddress,
 	assetName string, amount int64) (*api.TransactionExtention, error) {
 	var err error
-	contract := &core.TransferAssetContract{}
+	contract := &corecontract.TransferAssetContract{}
 	if contract.OwnerAddress, err = common.DecodeCheck(from); err != nil {
 		return nil, err
 	}
@@ -217,7 +217,7 @@ func (g *GrpcClient) TransferAsset(from, toAddress,
 func (g *GrpcClient) ParticipateAssetIssue(from, issuerAddress,
 	tokenID string, amount int64) (*api.TransactionExtention, error) {
 	var err error
-	contract := &core.ParticipateAssetIssueContract{}
+	contract := &corecontract.ParticipateAssetIssueContract{}
 	if contract.OwnerAddress, err = common.DecodeCheck(from); err != nil {
 		return nil, err
 	}
@@ -248,7 +248,7 @@ func (g *GrpcClient) ParticipateAssetIssue(from, issuerAddress,
 func (g *GrpcClient) UnfreezeAsset(from string) (*api.TransactionExtention, error) {
 	var err error
 
-	contract := &core.UnfreezeAssetContract{}
+	contract := &corecontract.UnfreezeAssetContract{}
 	if contract.OwnerAddress, err = common.DecodeCheck(from); err != nil {
 		return nil, err
 	}

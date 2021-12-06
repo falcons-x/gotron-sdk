@@ -3,6 +3,7 @@ package client
 import (
 	"encoding/binary"
 	"fmt"
+	corecontract "github.com/fbsobreira/gotron-sdk/pkg/proto/core/contract"
 
 	"github.com/fbsobreira/gotron-sdk/pkg/common"
 	"github.com/fbsobreira/gotron-sdk/pkg/proto/api"
@@ -53,7 +54,7 @@ func (g *GrpcClient) ExchangeCreate(
 ) (*api.TransactionExtention, error) {
 	var err error
 
-	contract := &core.ExchangeCreateContract{
+	contract := &corecontract.ExchangeCreateContract{
 		FirstTokenId:       []byte(tokenID1),
 		FirstTokenBalance:  amountToken1,
 		SecondTokenId:      []byte(tokenID2),
@@ -88,7 +89,7 @@ func (g *GrpcClient) ExchangeInject(
 ) (*api.TransactionExtention, error) {
 	var err error
 
-	contract := &core.ExchangeInjectContract{
+	contract := &corecontract.ExchangeInjectContract{
 		ExchangeId: exchangeID,
 		TokenId:    []byte(tokenID),
 		Quant:      amountToken,
@@ -122,7 +123,7 @@ func (g *GrpcClient) ExchangeWithdraw(
 ) (*api.TransactionExtention, error) {
 	var err error
 
-	contract := &core.ExchangeWithdrawContract{
+	contract := &corecontract.ExchangeWithdrawContract{
 		ExchangeId: exchangeID,
 		TokenId:    []byte(tokenID),
 		Quant:      amountToken,
@@ -157,7 +158,7 @@ func (g *GrpcClient) ExchangeTrade(
 ) (*api.TransactionExtention, error) {
 	var err error
 
-	contract := &core.ExchangeTransactionContract{
+	contract := &corecontract.ExchangeTransactionContract{
 		ExchangeId: exchangeID,
 		TokenId:    []byte(tokenID),
 		Quant:      amountToken,

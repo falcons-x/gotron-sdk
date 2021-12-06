@@ -5,6 +5,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
+	"github.com/fbsobreira/gotron-sdk/pkg/proto/core/contract"
 	"math/big"
 	"reflect"
 	"strconv"
@@ -13,7 +14,6 @@ import (
 	eABI "github.com/ethereum/go-ethereum/accounts/abi"
 	eCommon "github.com/ethereum/go-ethereum/common"
 	"github.com/fbsobreira/gotron-sdk/pkg/address"
-	"github.com/fbsobreira/gotron-sdk/pkg/proto/core"
 	"golang.org/x/crypto/sha3"
 )
 
@@ -223,7 +223,7 @@ func Pack(method string, param []Param) ([]byte, error) {
 }
 
 // GetParser return output method parser arguments from ABI
-func GetParser(ABI *core.SmartContract_ABI, method string) (eABI.Arguments, error) {
+func GetParser(ABI *contract.SmartContract_ABI, method string) (eABI.Arguments, error) {
 	arguments := eABI.Arguments{}
 	for _, entry := range ABI.Entrys {
 		if entry.Name == method {

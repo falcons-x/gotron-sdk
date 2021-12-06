@@ -3,6 +3,7 @@ package client
 import (
 	"bytes"
 	"fmt"
+	"github.com/fbsobreira/gotron-sdk/pkg/proto/core/contract"
 	"math/big"
 
 	"github.com/fbsobreira/gotron-sdk/pkg/account"
@@ -73,7 +74,7 @@ func (g *GrpcClient) GetAccountNet(addr string) (*api.AccountNetMessage, error) 
 func (g *GrpcClient) CreateAccount(from, addr string) (*api.TransactionExtention, error) {
 	var err error
 
-	contract := &core.AccountCreateContract{}
+	contract := &contract.AccountCreateContract{}
 	if contract.OwnerAddress, err = common.DecodeCheck(from); err != nil {
 		return nil, err
 	}
@@ -99,7 +100,7 @@ func (g *GrpcClient) CreateAccount(from, addr string) (*api.TransactionExtention
 // UpdateAccount change account name
 func (g *GrpcClient) UpdateAccount(from, accountName string) (*api.TransactionExtention, error) {
 	var err error
-	contract := &core.AccountUpdateContract{}
+	contract := &contract.AccountUpdateContract{}
 	contract.AccountName = []byte(accountName)
 	if contract.OwnerAddress, err = common.DecodeCheck(from); err != nil {
 		return nil, err
@@ -149,7 +150,7 @@ func (g *GrpcClient) GetAccountDetailed(addr string) (*account.Account, error) {
 	frozenList := make([]account.FrozenResource, 0)
 	if acc.GetAccountResource().GetFrozenBalanceForEnergy().GetFrozenBalance() > 0 {
 		frozenList = append(frozenList, account.FrozenResource{
-			Type:       core.ResourceCode_ENERGY,
+			Type:       contract.ResourceCode_ENERGY,
 			Amount:     acc.GetAccountResource().GetFrozenBalanceForEnergy().GetFrozenBalance(),
 			Expire:     acc.GetAccountResource().GetFrozenBalanceForEnergy().GetExpireTime(),
 			DelegateTo: "",
@@ -158,7 +159,7 @@ func (g *GrpcClient) GetAccountDetailed(addr string) (*account.Account, error) {
 	}
 	for _, f := range acc.Frozen {
 		frozenList = append(frozenList, account.FrozenResource{
-			Type:       core.ResourceCode_BANDWIDTH,
+			Type:       contract.ResourceCode_BANDWIDTH,
 			Amount:     f.GetFrozenBalance(),
 			Expire:     f.GetExpireTime(),
 			DelegateTo: "",
@@ -171,7 +172,7 @@ func (g *GrpcClient) GetAccountDetailed(addr string) (*account.Account, error) {
 		for _, d := range delegated.GetDelegatedResource() {
 			if d.GetFrozenBalanceForBandwidth() > 0 {
 				frozenList = append(frozenList, account.FrozenResource{
-					Type:       core.ResourceCode_BANDWIDTH,
+					Type:       contract.ResourceCode_BANDWIDTH,
 					Amount:     d.GetFrozenBalanceForBandwidth(),
 					Expire:     d.GetExpireTimeForBandwidth(),
 					DelegateTo: address.Address(d.GetTo()).String(),
@@ -180,7 +181,7 @@ func (g *GrpcClient) GetAccountDetailed(addr string) (*account.Account, error) {
 			}
 			if d.GetFrozenBalanceForEnergy() > 0 {
 				frozenList = append(frozenList, account.FrozenResource{
-					Type:       core.ResourceCode_ENERGY,
+					Type:       contract.ResourceCode_ENERGY,
 					Amount:     d.GetFrozenBalanceForEnergy(),
 					Expire:     d.GetExpireTimeForEnergy(),
 					DelegateTo: address.Address(d.GetTo()).String(),
@@ -226,7 +227,7 @@ func (g *GrpcClient) GetAccountDetailed(addr string) (*account.Account, error) {
 // WithdrawBalance rewards from account
 func (g *GrpcClient) WithdrawBalance(from string) (*api.TransactionExtention, error) {
 	var err error
-	contract := &core.WithdrawBalanceContract{}
+	contract := &contract.WithdrawBalanceContract{}
 	if contract.OwnerAddress, err = common.DecodeCheck(from); err != nil {
 		return nil, err
 	}
@@ -327,7 +328,7 @@ func (g *GrpcClient) UpdateAccountPermission(from string, owner, witness map[str
 	if err != nil {
 		return nil, err
 	}
-	contract := &core.AccountPermissionUpdateContract{
+	contract := &contract.AccountPermissionUpdateContract{
 		Owner: ownerPermission,
 	}
 

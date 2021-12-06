@@ -2,19 +2,19 @@ package client
 
 import (
 	"fmt"
+	corecontract "github.com/fbsobreira/gotron-sdk/pkg/proto/core/contract"
 
 	"github.com/fbsobreira/gotron-sdk/pkg/common"
 	"github.com/fbsobreira/gotron-sdk/pkg/proto/api"
-	"github.com/fbsobreira/gotron-sdk/pkg/proto/core"
 	"github.com/golang/protobuf/proto"
 )
 
 // FreezeBalance from base58 address
 func (g *GrpcClient) FreezeBalance(from, delegateTo string,
-	resource core.ResourceCode, frozenBalance int64) (*api.TransactionExtention, error) {
+	resource corecontract.ResourceCode, frozenBalance int64) (*api.TransactionExtention, error) {
 	var err error
 
-	contract := &core.FreezeBalanceContract{}
+	contract := &corecontract.FreezeBalanceContract{}
 	if contract.OwnerAddress, err = common.DecodeCheck(from); err != nil {
 		return nil, err
 	}
@@ -47,10 +47,10 @@ func (g *GrpcClient) FreezeBalance(from, delegateTo string,
 }
 
 // UnfreezeBalance from base58 address
-func (g *GrpcClient) UnfreezeBalance(from, delegateTo string, resource core.ResourceCode) (*api.TransactionExtention, error) {
+func (g *GrpcClient) UnfreezeBalance(from, delegateTo string, resource corecontract.ResourceCode) (*api.TransactionExtention, error) {
 	var err error
 
-	contract := &core.UnfreezeBalanceContract{}
+	contract := &corecontract.UnfreezeBalanceContract{}
 	if contract.OwnerAddress, err = common.DecodeCheck(from); err != nil {
 		return nil, err
 	}

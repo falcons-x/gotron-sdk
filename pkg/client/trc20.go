@@ -4,13 +4,13 @@ import (
 	"bytes"
 	"encoding/hex"
 	"fmt"
+	corecontract "github.com/fbsobreira/gotron-sdk/pkg/proto/core/contract"
 	"math/big"
 	"unicode/utf8"
 
 	"github.com/fbsobreira/gotron-sdk/pkg/address"
 	"github.com/fbsobreira/gotron-sdk/pkg/common"
 	"github.com/fbsobreira/gotron-sdk/pkg/proto/api"
-	"github.com/fbsobreira/gotron-sdk/pkg/proto/core"
 )
 
 const (
@@ -40,7 +40,7 @@ func (g *GrpcClient) TRC20Call(from, contractAddress, data string, constant bool
 	if err != nil {
 		return nil, err
 	}
-	ct := &core.TriggerSmartContract{
+	ct := &corecontract.TriggerSmartContract{
 		OwnerAddress:    fromDesc.Bytes(),
 		ContractAddress: contractDesc.Bytes(),
 		Data:            dataBytes,

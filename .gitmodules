@@ -2,4 +2,3 @@
 	path = proto/tron
 	url = https://github.com/tronprotocol/protocol.git
 	branch = master
-	ignore = dirty

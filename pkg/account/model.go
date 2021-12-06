@@ -1,12 +1,12 @@
 package account
 
 import (
-	"github.com/fbsobreira/gotron-sdk/pkg/proto/core"
+	"github.com/fbsobreira/gotron-sdk/pkg/proto/core/contract"
 )
 
 // FrozenResource by account
 type FrozenResource struct {
-	Type       core.ResourceCode
+	Type       contract.ResourceCode
 	Amount     int64
 	DelegateTo string
 	Expire     int64

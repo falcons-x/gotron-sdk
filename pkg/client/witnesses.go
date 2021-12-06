@@ -2,10 +2,10 @@ package client
 
 import (
 	"fmt"
+	corecontract "github.com/fbsobreira/gotron-sdk/pkg/proto/core/contract"
 
 	"github.com/fbsobreira/gotron-sdk/pkg/common"
 	"github.com/fbsobreira/gotron-sdk/pkg/proto/api"
-	"github.com/fbsobreira/gotron-sdk/pkg/proto/core"
 	"github.com/golang/protobuf/proto"
 )
 
@@ -21,7 +21,7 @@ func (g *GrpcClient) ListWitnesses() (*api.WitnessList, error) {
 func (g *GrpcClient) CreateWitness(from, urlStr string) (*api.TransactionExtention, error) {
 	var err error
 
-	contract := &core.WitnessCreateContract{
+	contract := &corecontract.WitnessCreateContract{
 		Url: []byte(urlStr),
 	}
 	if contract.OwnerAddress, err = common.DecodeCheck(from); err != nil {
@@ -48,7 +48,7 @@ func (g *GrpcClient) CreateWitness(from, urlStr string) (*api.TransactionExtenti
 func (g *GrpcClient) UpdateWitness(from, urlStr string) (*api.TransactionExtention, error) {
 	var err error
 
-	contract := &core.WitnessUpdateContract{}
+	contract := &corecontract.WitnessUpdateContract{}
 	if contract.OwnerAddress, err = common.DecodeCheck(from); err != nil {
 		return nil, err
 	}
@@ -75,14 +75,14 @@ func (g *GrpcClient) VoteWitnessAccount(from string,
 	witnessMap map[string]int64) (*api.TransactionExtention, error) {
 	var err error
 
-	contract := &core.VoteWitnessContract{}
+	contract := &corecontract.VoteWitnessContract{}
 	if contract.OwnerAddress, err = common.DecodeCheck(from); err != nil {
 		return nil, err
 	}
 
 	for key, value := range witnessMap {
 		if witnessAddress, err := common.DecodeCheck(key); err == nil {
-			vote := &core.VoteWitnessContract_Vote{
+			vote := &corecontract.VoteWitnessContract_Vote{
 				VoteAddress: witnessAddress,
 				VoteCount:   value,
 			}
@@ -130,7 +130,7 @@ func (g *GrpcClient) GetWitnessBrokerage(witness string) (float64, error) {
 func (g *GrpcClient) UpdateBrokerage(from string, comission int32) (*api.TransactionExtention, error) {
 	var err error
 
-	contract := &core.UpdateBrokerageContract{
+	contract := &corecontract.UpdateBrokerageContract{
 		Brokerage: comission,
 	}
 	if contract.OwnerAddress, err = common.DecodeCheck(from); err != nil {

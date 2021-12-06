@@ -3,6 +3,7 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
+	corecontract "github.com/fbsobreira/gotron-sdk/pkg/proto/core/contract"
 	"time"
 
 	"github.com/fatih/structs"
@@ -109,104 +110,104 @@ func bcSub() []*cobra.Command {
 			//parse contract
 			switch contract.Type {
 			case core.Transaction_Contract_AccountCreateContract:
-				var c core.AccountCreateContract
+				var c corecontract.AccountCreateContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
 				result["contract"] = structs.Map(c)
 			case core.Transaction_Contract_TransferContract:
-				var c core.TransferContract
+				var c corecontract.TransferContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
 				result["contract"] = structs.Map(c)
 			case core.Transaction_Contract_TransferAssetContract:
-				var c core.TransferAssetContract
+				var c corecontract.TransferAssetContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
 				result["contract"] = structs.Map(c)
 			case core.Transaction_Contract_VoteWitnessContract:
-				var c core.VoteWitnessContract
+				var c corecontract.VoteWitnessContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
 				result["contract"] = structs.Map(c)
 			case core.Transaction_Contract_WitnessCreateContract:
-				var c core.WitnessCreateContract
+				var c corecontract.WitnessCreateContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
 				result["contract"] = structs.Map(c)
 			case core.Transaction_Contract_AssetIssueContract:
-				var c core.AssetIssueContract
+				var c corecontract.AssetIssueContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
 				result["contract"] = structs.Map(c)
 			case core.Transaction_Contract_ParticipateAssetIssueContract:
-				var c core.ParticipateAssetIssueContract
+				var c corecontract.ParticipateAssetIssueContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
 				result["contract"] = structs.Map(c)
 			case core.Transaction_Contract_AccountUpdateContract:
-				var c core.AccountUpdateContract
+				var c corecontract.AccountUpdateContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
 				result["contract"] = structs.Map(c)
 			case core.Transaction_Contract_FreezeBalanceContract:
-				var c core.FreezeBalanceContract
+				var c corecontract.FreezeBalanceContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
 				result["contract"] = structs.Map(c)
 			case core.Transaction_Contract_UnfreezeBalanceContract:
-				var c core.UnfreezeBalanceContract
+				var c corecontract.UnfreezeBalanceContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
 				result["contract"] = structs.Map(c)
 			case core.Transaction_Contract_WithdrawBalanceContract:
-				var c core.WithdrawBalanceContract
+				var c corecontract.WithdrawBalanceContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
 				result["contract"] = structs.Map(c)
 			case core.Transaction_Contract_UnfreezeAssetContract:
-				var c core.UnfreezeAssetContract
+				var c corecontract.UnfreezeAssetContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
 				result["contract"] = structs.Map(c)
 			case core.Transaction_Contract_UpdateAssetContract:
-				var c core.UpdateAssetContract
+				var c corecontract.UpdateAssetContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
 				result["contract"] = structs.Map(c)
 
 			case core.Transaction_Contract_ProposalCreateContract:
-				var c core.ProposalCreateContract
+				var c corecontract.ProposalCreateContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
 				result["contract"] = structs.Map(c)
 			case core.Transaction_Contract_ProposalApproveContract:
-				var c core.ProposalApproveContract
+				var c corecontract.ProposalApproveContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
 				result["contract"] = structs.Map(c)
 			case core.Transaction_Contract_ProposalDeleteContract:
-				var c core.ProposalDeleteContract
+				var c corecontract.ProposalDeleteContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
 				result["contract"] = structs.Map(c)
 			case core.Transaction_Contract_SetAccountIdContract:
-				var c core.SetAccountIdContract
+				var c corecontract.SetAccountIdContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
@@ -214,73 +215,73 @@ func bcSub() []*cobra.Command {
 			case core.Transaction_Contract_CustomContract:
 				return fmt.Errorf("Tx inconsistent")
 			case core.Transaction_Contract_CreateSmartContract:
-				var c core.CreateSmartContract
+				var c corecontract.CreateSmartContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
 				result["contract"] = structs.Map(c)
 			case core.Transaction_Contract_TriggerSmartContract:
-				var c core.TriggerSmartContract
+				var c corecontract.TriggerSmartContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
 				result["contract"] = structs.Map(c)
 			case core.Transaction_Contract_UpdateSettingContract:
-				var c core.UpdateSettingContract
+				var c corecontract.UpdateSettingContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
 				result["contract"] = structs.Map(c)
 			case core.Transaction_Contract_ExchangeCreateContract:
-				var c core.ExchangeCreateContract
+				var c corecontract.ExchangeCreateContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
 				result["contract"] = structs.Map(c)
 			case core.Transaction_Contract_ExchangeInjectContract:
-				var c core.ExchangeInjectContract
+				var c corecontract.ExchangeInjectContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
 				result["contract"] = structs.Map(c)
 			case core.Transaction_Contract_ExchangeWithdrawContract:
-				var c core.ExchangeWithdrawContract
+				var c corecontract.ExchangeWithdrawContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
 				result["contract"] = structs.Map(c)
 			case core.Transaction_Contract_ExchangeTransactionContract:
-				var c core.ExchangeTransactionContract
+				var c corecontract.ExchangeTransactionContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
 				result["contract"] = structs.Map(c)
 			case core.Transaction_Contract_UpdateEnergyLimitContract:
-				var c core.UpdateEnergyLimitContract
+				var c corecontract.UpdateEnergyLimitContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
 				result["contract"] = structs.Map(c)
 			case core.Transaction_Contract_AccountPermissionUpdateContract:
-				var c core.AccountPermissionUpdateContract
+				var c corecontract.AccountPermissionUpdateContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
 				result["contract"] = structs.Map(c)
 			case core.Transaction_Contract_ClearABIContract:
-				var c core.ClearABIContract
+				var c corecontract.ClearABIContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
 				result["contract"] = structs.Map(c)
 			case core.Transaction_Contract_UpdateBrokerageContract:
-				var c core.UpdateBrokerageContract
+				var c corecontract.UpdateBrokerageContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
 				result["contract"] = structs.Map(c)
 			case core.Transaction_Contract_ShieldedTransferContract:
-				var c core.ShieldedTransferContract
+				var c corecontract.ShieldedTransferContract
 				if err = ptypes.UnmarshalAny(contract.GetParameter(), &c); err != nil {
 					return fmt.Errorf("Tx inconsistent")
 				}
